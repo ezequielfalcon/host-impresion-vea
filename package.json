@@ -1,0 +1,8 @@
+{
+  "name": "host-impresion-vea",
+  "version": "1.0.0",
+  "description": "Host de impresión fiscal",
+  "main": "host.js",
+  "author": "Ezequiel Falcón",
+  "license": "MIT"
+}
