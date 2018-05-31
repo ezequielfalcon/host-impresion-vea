@@ -4,5 +4,11 @@
   "description": "Host de impresión fiscal",
   "main": "host.js",
   "author": "Ezequiel Falcón",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.19.1"
+  },
+  "dependencies": {
+    "escpos": "^2.4.9"
+  }
 }
