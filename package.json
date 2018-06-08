@@ -9,6 +9,7 @@
     "eslint": "^4.19.1"
   },
   "dependencies": {
-    "escpos": "^2.4.9"
+    "escpos": "^2.4.9",
+    "express": "^4.16.3"
   }
 }
