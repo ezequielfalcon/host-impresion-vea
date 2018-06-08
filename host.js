@@ -2,13 +2,14 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-const escpos = require('escpos');
-const device  = new escpos.Network('172.16.1.10');
-const options = { encoding: "windows1252" /* default */ };
-const printer = new escpos.Printer(device, options);
+
 
 
 function imprimir(nPedido, items) {
+  const escpos = require('escpos');
+  const device  = new escpos.Network('172.16.1.10');
+  const options = { encoding: "windows1252" /* default */ };
+  const printer = new escpos.Printer(device, options);
   device.open(() => {
     printer
       .font('a')
@@ -40,7 +41,9 @@ function imprimir(nPedido, items) {
       .control('LF')
       .cut('full')
       .close();
-  });
+  })
+
+
 }
 
 app.use((req, res, next) => {
@@ -64,13 +67,15 @@ app.get('/', (req, res) => {
 
 app.post('/imprimir', (req, res) => {
   if (req.body.npedido && req.body.items) {
-    const itemsPedido = JSON.parse(req.body.items);
-    imprimir(itemsPedido);
-    res.json({mensaje: "Ticket impreso!!"});
+    const itemsPedido = req.body.items.split(',');
+    imprimir(req.body.npedido, itemsPedido);
+    res.json({mensaje: "Ticket impreso!!"}).end();
   } else {
     res.status(400).end();
   }
 })
+
+
 
 app.listen(app.get('port'), () => {
   console.log('Host de impresión escuchando en puerto ', app.get('port'));
